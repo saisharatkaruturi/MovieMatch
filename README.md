@@ -131,7 +131,7 @@ Through this project I gained hands-on experience with:
 **Sai Sharat Karuturi**
 
 - LinkedIn: https://linkedin.com/saisharatkaruturi
-- GitHub: https://github.com/your-gith
+- GitHub: https://github.com/saisharatkaruturi
 
 ---
 
