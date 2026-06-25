@@ -1,0 +1,137 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.stat-label {
+  font-size: 1rem;
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.analysis-card {
+  background: var(--color-card);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.analysis-card h2 {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.analysis-card p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 0 0 1rem 0;
+}
+
+.top-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.top-table th, .top-table td {
+  text-align: left;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.top-table th {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.top-table .rating {
+  color: #06b6d4;
+  font-weight: 600;
+}
+
+.genre-bar {
+  margin-bottom: 1rem;
+}
+
+.genre-bar__label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.genre-bar__track {
+  height: 8px;
+  background: var(--color-bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.genre-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 4px;
+}
+
+.coverage-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.coverage-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.coverage-list li:last-child {
+  border-bottom: none;
+}
+
+.year-highlight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  color: #ffffff;
+}
+
+.year-arrow {
+  color: #06b6d4;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+}

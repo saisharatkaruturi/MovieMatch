@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="reelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="50%" style="stop-color:#67e8f9"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Main Film Reel Circle -->
+  <circle cx="100" cy="100" r="90" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="6" filter="url(#glow)"/>
+
+  <!-- Large Sprocket Holes (the key feature of a film reel) -->
+  <circle cx="100" cy="35" r="20" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+  <circle cx="100" cy="165" r="20" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+  <circle cx="35" cy="100" r="20" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+  <circle cx="165" cy="100" r="20" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+
+  <!-- Diagonal Sprocket Holes -->
+  <circle cx="49" cy="49" r="16" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+  <circle cx="151" cy="49" r="16" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+  <circle cx="49" cy="151" r="16" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+  <circle cx="151" cy="151" r="16" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+
+  <!-- Center Hub -->
+  <circle cx="100" cy="100" r="35" fill="#0a0a0a" stroke="url(#reelGrad)" stroke-width="4"/>
+  <circle cx="100" cy="100" r="15" fill="url(#reelGrad)"/>
+  <circle cx="100" cy="100" r="6" fill="#0a0a0a"/>
+
+  <!-- Spokes connecting center to outer ring -->
+  <line x1="100" y1="65" x2="100" y2="38" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="100" y1="135" x2="100" y2="162" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="65" y1="100" x2="38" y2="100" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="135" y1="100" x2="162" y2="100" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Diagonal spokes -->
+  <line x1="128" y1="72" x2="144" y2="56" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="72" y1="128" x2="56" y2="144" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="128" y1="128" x2="144" y2="144" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="72" y1="72" x2="56" y2="56" stroke="url(#reelGrad)" stroke-width="4" stroke-linecap="round"/>
+</svg>
