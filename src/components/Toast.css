@@ -1,0 +1,122 @@
+/* ============================================================================
+   Toast — bottom-right notification stack
+   ============================================================================ */
+
+.toast-stack {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  pointer-events: none;
+  max-width: calc(100vw - 2rem);
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  min-width: 280px;
+  max-width: 360px;
+  padding: 0.85rem 1rem;
+  background: var(--gradient-glass), var(--surface-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+}
+
+.toast--success {
+  border-left: 3px solid var(--accent-emerald);
+}
+
+.toast--error {
+  border-left: 3px solid var(--accent-rose);
+}
+
+.toast--info {
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.toast__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: rgba(var(--glass-rgb), 0.06);
+}
+
+.toast--success .toast__icon {
+  background: rgba(52, 211, 153, 0.18);
+  color: var(--accent-emerald);
+}
+
+.toast--error .toast__icon {
+  background: rgba(244, 114, 182, 0.18);
+  color: var(--accent-rose);
+}
+
+.toast--info .toast__icon {
+  background: rgba(34, 211, 238, 0.18);
+  color: var(--accent-cyan);
+}
+
+.toast__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast__title {
+  margin: 0 0 0.15rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.toast__msg {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.toast__close {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.toast__close:hover {
+  color: var(--text-primary);
+  background: rgba(var(--glass-rgb), 0.06);
+}
+
+@media (max-width: 480px) {
+  .toast-stack {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+  .toast {
+    min-width: 0;
+    max-width: none;
+  }
+}

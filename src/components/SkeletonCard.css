@@ -1,0 +1,77 @@
+/* ============================================================================
+   SkeletonCard — shimmer placeholders
+   ============================================================================ */
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.skeleton-card__poster {
+  aspect-ratio: 2 / 3;
+  background: linear-gradient(90deg, var(--surface-1) 0%, var(--surface-2) 40%, var(--surface-3) 60%, var(--surface-1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.skeleton-card__info {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.skeleton-card__line {
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--surface-1) 0%, var(--surface-2) 40%, var(--surface-3) 60%, var(--surface-1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.skeleton-card__line--lg {
+  height: 14px;
+  width: 90%;
+}
+
+.skeleton-card__line--sm {
+  width: 55%;
+}
+
+.skeleton-card__chips {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.skeleton-card__chip {
+  width: 50px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--surface-1) 0%, var(--surface-2) 40%, var(--surface-3) 60%, var(--surface-1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-card__poster,
+  .skeleton-card__line,
+  .skeleton-card__chip {
+    animation: none;
+  }
+}

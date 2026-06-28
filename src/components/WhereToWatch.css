@@ -1,0 +1,675 @@
+/* ============================================================================
+   Where to Watch — premium streaming-availability card grid
+   Design language: glassmorphism panels + cyan/violet accents + animated
+   skeleton loaders. All variables reuse the project's existing theme tokens
+   so the section matches the rest of MovieMatch.
+   ============================================================================ */
+
+/* Theme opt-out: this panel is a "spotlight" sub-app inside MovieDetails.
+   Force dark text values regardless of [data-theme] so provider logos and
+   the cyan glow stay readable in light mode. Revisit only if the user
+   later requests light-mode WhereToWatch. */
+[data-theme="light"] .where-to-watch {
+  --color-text: #F5F5F7;
+  --color-text-secondary: #A3A3B0;
+  --color-text-muted: #6B6B7A;
+  --color-primary-light: #67E8F9;
+}
+
+.where-to-watch {
+  --wtw-accent: #06b6d4;
+  --wtw-accent-soft: rgba(6, 182, 212, 0.18);
+  --wtw-glass-bg: rgba(10, 10, 10, 0.55);
+  --wtw-glass-border: rgba(255, 255, 255, 0.08);
+  --wtw-radius: 18px;
+  position: relative;
+  margin: 3rem 0 4rem;
+  padding: 2rem;
+  border-radius: var(--wtw-radius);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.06), rgba(124, 58, 237, 0.04)),
+              var(--wtw-glass-bg);
+  border: 1px solid var(--wtw-glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+/* Decorative corner glow — keeps the panel feeling premium without being loud. */
+.where-to-watch::before {
+  content: '';
+  position: absolute;
+  inset: -40% -40% auto auto;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.18), transparent 65%);
+  pointer-events: none;
+}
+
+/* ------------------------------ Header ------------------------------ */
+
+.wtw__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.wtw__title-block {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.wtw__title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.wtw__title-icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+}
+
+.wtw__subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.wtw__subtitle strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* ---------------------------- Country selector ---------------------------- */
+
+.wtw__country {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.wtw__country-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--wtw-glass-border);
+  border-radius: 999px;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.wtw__country-button:hover {
+  background: rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.4);
+}
+
+.wtw__country.is-open .wtw__country-button {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+.wtw__country-flag {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.wtw__country-caret {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.wtw__country.is-open .wtw__country-caret {
+  transform: rotate(180deg);
+}
+
+.wtw__country-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  margin: 0;
+  padding: 0.4rem;
+  list-style: none;
+  background: rgba(15, 15, 15, 0.96);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  z-index: 30;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: wtw-dropdown-in 180ms ease-out;
+}
+
+@keyframes wtw-dropdown-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wtw__country-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.wtw__country-option:hover {
+  background: rgba(6, 182, 212, 0.1);
+}
+
+.wtw__country-option.is-active {
+  background: rgba(6, 182, 212, 0.18);
+  color: var(--color-primary-light);
+  font-weight: 600;
+}
+
+/* ---------------------------- Category grid ---------------------------- */
+
+.wtw__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.wtw__category {
+  padding: 1.25rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: wtw-fade-in 320ms ease-out both;
+}
+
+@keyframes wtw-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wtw__category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.wtw__category-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--wtw-accent);
+  color: #001018;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px rgba(6, 182, 212, 0.35);
+}
+
+.wtw__category-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.wtw__category-count {
+  margin-left: auto;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.wtw__provider-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+/* ---------------------------- Provider card ---------------------------- */
+
+.wtw__provider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.95rem;
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  animation: wtw-card-in 360ms ease-out both;
+}
+
+@keyframes wtw-card-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.wtw__provider:hover {
+  transform: translateY(-3px);
+  border-color: rgba(6, 182, 212, 0.45);
+  background: linear-gradient(160deg, rgba(6, 182, 212, 0.08), rgba(255, 255, 255, 0.02));
+  box-shadow: 0 14px 32px rgba(6, 182, 212, 0.18);
+}
+
+.wtw__provider-logo-wrap {
+  position: relative;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.wtw__provider-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.wtw__provider-logo-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #001018;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.wtw__provider-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.wtw__provider-name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.98rem;
+  /* Single-line truncation — provider names should never break the card. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wtw__provider-type {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.wtw__provider-badges {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.3rem;
+}
+
+.wtw__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.wtw__badge--hd {
+  background: rgba(167, 139, 250, 0.18);
+  color: #c4b5fd;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+}
+
+.wtw__badge--4k {
+  background: rgba(244, 114, 182, 0.18);
+  color: #f9a8d4;
+  border: 1px solid rgba(244, 114, 182, 0.35);
+}
+
+.wtw__watch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding: 0.55rem 0.9rem;
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: #001018;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 6px 14px rgba(6, 182, 212, 0.3);
+}
+
+.wtw__watch-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(6, 182, 212, 0.5);
+  filter: brightness(1.05);
+}
+
+.wtw__watch-btn--disabled {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.wtw__watch-btn--disabled:hover {
+  transform: none;
+  filter: none;
+  box-shadow: none;
+}
+
+.wtw__watch-icon {
+  font-size: 0.7rem;
+}
+
+.wtw__show-all {
+  margin-top: 0.9rem;
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.wtw__show-all:hover {
+  color: var(--color-text);
+  border-color: rgba(6, 182, 212, 0.45);
+  background: rgba(6, 182, 212, 0.06);
+}
+
+.wtw__deep-link {
+  display: inline-block;
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: var(--color-primary-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.wtw__deep-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* ---------------------------- Empty state ---------------------------- */
+
+.wtw__empty {
+  text-align: center;
+  padding: 2.25rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+  animation: wtw-fade-in 280ms ease-out both;
+}
+
+.wtw__empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.4));
+}
+
+.wtw__empty-title {
+  margin: 0 0 0.4rem;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.wtw__empty-text {
+  margin: 0 0 1.25rem;
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.wtw__empty-text em {
+  color: var(--color-text);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.wtw__empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.wtw__empty-btn {
+  padding: 0.55rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.wtw__empty-btn:hover {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: var(--color-primary-light);
+}
+
+/* ---------------------------- Error ---------------------------- */
+
+.wtw__error {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fecaca;
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+/* ---------------------------- Skeleton ---------------------------- */
+
+.wtw__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.wtw__skeleton-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.wtw__skeleton-title {
+  width: 180px;
+  height: 18px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  background-size: 200% 100%;
+  animation: wtw-shimmer 1.4s linear infinite;
+}
+
+.wtw__skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.wtw__skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.95rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wtw__skeleton-logo {
+  width: 100%;
+  height: 64px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  background-size: 200% 100%;
+  animation: wtw-shimmer 1.4s linear infinite;
+}
+
+.wtw__skeleton-line {
+  width: 80%;
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  background-size: 200% 100%;
+  animation: wtw-shimmer 1.4s linear infinite;
+}
+
+.wtw__skeleton-line--short {
+  width: 50%;
+}
+
+.wtw__skeleton-button {
+  width: 100%;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  background-size: 200% 100%;
+  animation: wtw-shimmer 1.4s linear infinite;
+  margin-top: auto;
+}
+
+@keyframes wtw-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---------------------------- Responsive ---------------------------- */
+
+@media (max-width: 768px) {
+  .where-to-watch {
+    padding: 1.5rem 1.25rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .wtw__title {
+    font-size: 1.35rem;
+  }
+
+  .wtw__subtitle {
+    font-size: 0.88rem;
+  }
+
+  .wtw__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wtw__country {
+    width: 100%;
+  }
+
+  .wtw__country-button {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .wtw__country-menu {
+    left: 0;
+    right: 0;
+    min-width: 0;
+  }
+
+  .wtw__provider-grid,
+  .wtw__skeleton-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .wtw__category {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .where-to-watch {
+    padding: 1.1rem 0.9rem;
+    border-radius: 14px;
+  }
+
+  .wtw__title {
+    font-size: 1.2rem;
+  }
+
+  .wtw__provider-grid,
+  .wtw__skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wtw__empty-actions .wtw__empty-btn {
+    flex: 1 1 calc(50% - 0.6rem);
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wtw__provider,
+  .wtw__category,
+  .wtw__empty,
+  .wtw__country-menu,
+  .wtw__skeleton-logo,
+  .wtw__skeleton-title,
+  .wtw__skeleton-line,
+  .wtw__skeleton-button {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,102 @@
+/* ============================================================================
+   SectionHeader — title row used at the top of every carousel
+   ============================================================================ */
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+  flex-wrap: wrap;
+}
+
+.section-header--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.section-header__left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.section-header__icon {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-md);
+  font-size: 1.25rem;
+  box-shadow: var(--glow-cyan-sm);
+  flex-shrink: 0;
+}
+
+.section-header__text {
+  min-width: 0;
+}
+
+.section-header__title {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.section-header__kicker {
+  margin: 0.2rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.section-header__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-header__meta {
+  padding: 0.25rem 0.6rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.section-header__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.95rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.section-header__action:hover {
+  background: rgba(34, 211, 238, 0.10);
+  border-color: rgba(34, 211, 238, 0.4);
+  color: var(--accent-cyan-bright);
+  transform: translateX(2px);
+}
+
+.section-header__action-arrow {
+  transition: transform 0.18s ease;
+}
+
+.section-header__action:hover .section-header__action-arrow {
+  transform: translateX(2px);
+}

@@ -1,0 +1,333 @@
+/* ============================================================================
+   FeaturedMovie — "🎬 Featured Today" card.
+
+   Visually consistent with the rest of the site: same glass surface
+   treatment, same accent ramp, same radii. All colors use design tokens
+   so the dark / light theme swap applies automatically.
+   ============================================================================ */
+
+.featured-today {
+  max-width: 1600px;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.featured-today__card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.75rem;
+  padding: 1.5rem;
+  background: var(--gradient-glass), var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.featured-today__card::before {
+  /* Top accent stripe — same pattern as the review form, mirrors hero glow. */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: var(--gradient-accent);
+  border-radius: 0 0 2px 2px;
+  opacity: 0.85;
+}
+
+.featured-today__card:hover {
+  border-color: rgba(34, 211, 238, 0.30);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), 0 0 32px rgba(34, 211, 238, 0.12);
+}
+
+/* === Poster === */
+
+.featured-today__poster-link {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-2);
+  align-self: start;
+}
+
+.featured-today__poster {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.featured-today__poster-link:hover .featured-today__poster {
+  transform: scale(1.04);
+}
+
+/* === Body === */
+
+.featured-today__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.featured-today__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  align-self: flex-start;
+  padding: 0.3rem 0.85rem;
+  background: rgba(var(--glass-rgb), 0.05);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.featured-today__kicker-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
+  animation: featured-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes featured-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.55; transform: scale(1.35); }
+}
+
+.featured-today__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.featured-today__title-link {
+  color: inherit;
+  text-decoration: none;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transition: filter var(--dur-fast) var(--ease-out);
+}
+
+.featured-today__title-link:hover {
+  filter: brightness(1.1);
+}
+
+/* === Chips row === */
+
+.featured-today__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.featured-today__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.7rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.featured-today__chip--muted {
+  background: var(--surface-1);
+  color: var(--text-muted);
+}
+
+.featured-today__chip--rating {
+  background: rgba(245, 158, 11, 0.10);
+  border-color: rgba(245, 158, 11, 0.30);
+  color: var(--accent-amber);
+  font-weight: 700;
+}
+
+.featured-today__chip--rating svg {
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
+}
+
+/* === Overview === */
+
+.featured-today__overview {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 78ch;
+}
+
+/* === Footer (CTA + countdown) === */
+
+.featured-today__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.featured-today__cta {
+  /* Reuses .hero__btn--ghost from Home.css for visual parity with the hero. */
+  text-decoration: none;
+}
+
+.featured-today__countdown-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.45rem 0.95rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+}
+
+.featured-today__countdown-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.featured-today__countdown {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-cyan-bright);
+  font-variant-numeric: tabular-nums;
+}
+
+.featured-today__pool-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.005em;
+}
+
+/* === Empty / fallback state === */
+
+.featured-today__card--empty {
+  grid-template-columns: 1fr;
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.featured-today__empty-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.4));
+}
+
+.featured-today__empty-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.featured-today__empty-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.featured-today__empty-msg {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* === Responsive === */
+
+@media (max-width: 1024px) {
+  .featured-today__card {
+    grid-template-columns: 180px 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-today {
+    padding: 0 1rem;
+  }
+  .featured-today__card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .featured-today__poster {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  .featured-today__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .featured-today__cta {
+    justify-content: center;
+  }
+  .featured-today__countdown-line {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-today__chips {
+    gap: 0.3rem;
+  }
+  .featured-today__chip {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+  }
+  .featured-today__title {
+    font-size: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-today__kicker-dot,
+  .featured-today__card,
+  .featured-today__poster {
+    animation: none !important;
+    transition: none !important;
+  }
+  .featured-today__card:hover {
+    transform: none !important;
+  }
+  .featured-today__poster-link:hover .featured-today__poster {
+    transform: none !important;
+  }
+}

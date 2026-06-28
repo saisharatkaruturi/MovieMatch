@@ -1,14 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MovieMatch - Movie Recommendations</title>
+    <meta name="theme-color" content="#07080C" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme: light)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>MovieMatch — Cinematic World Cinema 1900–2026</title>
+    <script>
+      // Pre-React bootstrap: resolve theme from localStorage + system pref
+      // before CSS parses to prevent flash of wrong theme. Mirrors the
+      // logic in src/context/ThemeContext.jsx.
+      (function () {
+        try {
+          var stored = localStorage.getItem('moviematch_theme_v1');
+          var resolved = 'dark';
+          if (stored === 'dark' || stored === 'light') {
+            resolved = stored;
+          } else {
+            resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', resolved);
+        } catch (e) {
+          // ignore — defaults to dark via html attribute above
+        }
+      })();
+    </script>
   </head>
   <body>
-
-                    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

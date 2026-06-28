@@ -937,6 +937,149 @@ export const fetchPopularPeople = async (page = 1) => {
   }
 };
 
+// ============================================================================
+// WATCH PROVIDERS API
+// ============================================================================
+// TMDB's /movie/{id}/watch/providers endpoint returns every country that has
+// availability data for the movie, grouped by monetisation type (flatrate,
+// rent, buy, free, ads). Each provider carries a logo_path and an optional
+// link that takes the user to the platform's deep page for the movie.
+//
+// The endpoint is hit on-demand (not on the movie detail's main load) and
+// results are cached in-memory + localStorage so the same movie × country
+// combination never refetches within the cache TTL.
+
+const WATCH_PROVIDER_CACHE_KEY = 'tmdb_watch_provider_cache_v1';
+const WATCH_PROVIDER_CACHE_TTL_MS = 1000 * 60 * 60 * 12; // 12 hours
+const WATCH_PROVIDER_LOGO_BASE = 'https://image.tmdb.org/t/p';
+
+// Supported country list shown in the country selector. Each entry has the
+// ISO-3166-1 code TMDB expects, the human-friendly label, and a flag emoji
+// used in the UI. Keep the codes aligned with TMDB's `/watch/providers/regions`
+// response — the selector always renders even if TMDB has no data for that
+// region (the section then renders the empty state).
+export const SUPPORTED_COUNTRIES = [
+  { code: 'IN', name: 'India', flag: '🇮🇳' },
+  { code: 'US', name: 'United States', flag: '🇺🇸' },
+  { code: 'GB', name: 'United Kingdom', flag: '🇬🇧' },
+  { code: 'AU', name: 'Australia', flag: '🇦🇺' },
+  { code: 'CA', name: 'Canada', flag: '🇨🇦' },
+  { code: 'JP', name: 'Japan', flag: '🇯🇵' },
+  { code: 'KR', name: 'South Korea', flag: '🇰🇷' },
+  { code: 'DE', name: 'Germany', flag: '🇩🇪' },
+  { code: 'FR', name: 'France', flag: '🇫🇷' },
+  { code: 'IT', name: 'Italy', flag: '🇮🇹' },
+];
+
+// Best-effort country detection from the browser locale / timezone. TMDB
+// returns no results for unknown regions — the caller is expected to fall back
+// to 'US' or 'IN' when this resolves to a country we don't track.
+export const detectUserCountry = () => {
+  if (typeof navigator === 'undefined') return 'US';
+  try {
+    // Intl.Locale exposes a region subtag (e.g. "en-IN" -> "IN"). Works in
+    // every modern browser; we still fall back to a timezone guess.
+    const locale = Intl.DateTimeFormat().resolvedOptions().locale || '';
+    const region = locale.split('-')[1]?.toUpperCase();
+    if (region && /^[A-Z]{2}$/.test(region)) return region;
+
+    const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').toLowerCase();
+    if (tz.includes('kolkata') || tz.includes('calcutta') || tz.includes('asia/calcutta')) return 'IN';
+    if (tz.includes('london')) return 'GB';
+    if (tz.includes('tokyo')) return 'JP';
+    if (tz.includes('seoul')) return 'KR';
+    if (tz.includes('sydney') || tz.includes('australia')) return 'AU';
+    if (tz.includes('berlin') || tz.includes('europe/')) return 'DE';
+    if (tz.includes('paris')) return 'FR';
+    if (tz.includes('rome') || tz.includes('italy')) return 'IT';
+    if (tz.includes('america/')) return 'US';
+  } catch (_) {
+    // ignore
+  }
+  return 'US';
+};
+
+const loadWatchProviderCache = () => {
+  if (typeof window === 'undefined') return {};
+  try {
+    const raw = window.localStorage.getItem(WATCH_PROVIDER_CACHE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (_) {
+    return {};
+  }
+};
+
+const saveWatchProviderCache = (cache) => {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(WATCH_PROVIDER_CACHE_KEY, JSON.stringify(cache));
+  } catch (_) {
+    // localStorage may be full or unavailable — ignore
+  }
+};
+
+const isCacheEntryFresh = (entry) =>
+  entry && typeof entry.fetchedAt === 'number' &&
+  Date.now() - entry.fetchedAt < WATCH_PROVIDER_CACHE_TTL_MS;
+
+// Fetch raw watch-provider data for a movie. Returns the full TMDB response
+// shape (`{ results: { [country]: { flatrate, rent, buy, free, ads, link } } }`)
+// so the caller can switch countries without re-hitting the network.
+export const fetchWatchProviders = async (movieId) => {
+  if (!movieId) return null;
+
+  const cache = loadWatchProviderCache();
+  const cacheKey = `movie:${movieId}`;
+  const cached = cache[cacheKey];
+  if (cached && isCacheEntryFresh(cached)) {
+    return cached.data;
+  }
+
+  try {
+    const { data } = await tmdbApi.get(`/movie/${movieId}/watch/providers`);
+    cache[cacheKey] = { fetchedAt: Date.now(), data };
+    saveWatchProviderCache(cache);
+    return data;
+  } catch (_) {
+    // Return whatever we last had, even if stale, before giving up entirely.
+    if (cached?.data) return cached.data;
+    return null;
+  }
+};
+
+// Group TMDB's country-keyed response into the per-country shape the UI
+// expects. Returns null when the country has no availability so the empty
+// state can render. Unknown monetization buckets are ignored on purpose — we
+// only render the four the spec calls out (streaming, rent, buy, free).
+export const getProvidersForCountry = (rawProviders, countryCode) => {
+  if (!rawProviders?.results || !countryCode) return null;
+  const country = rawProviders.results[countryCode];
+  if (!country) return null;
+
+  // TMDB returns both `free` (legally free with sub) and `ads` (free with ads).
+  // Surface them under one "Free" bucket per the spec.
+  const free = [
+    ...(Array.isArray(country.free) ? country.free : []),
+    ...(Array.isArray(country.ads) ? country.ads : []),
+  ];
+
+  return {
+    link: country.link || null,
+    streaming: Array.isArray(country.flatrate) ? country.flatrate : [],
+    rent: Array.isArray(country.rent) ? country.rent : [],
+    buy: Array.isArray(country.buy) ? country.buy : [],
+    free,
+  };
+};
+
+// Build a fully-qualified logo URL for a TMDB provider object. TMDB stores
+// provider logos as relative paths under image.tmdb.org/t/p/.
+export const getProviderLogoUrl = (provider, size = 'w92') => {
+  if (!provider?.logo_path) return null;
+  if (provider.logo_path.startsWith('http')) return provider.logo_path;
+  return `${WATCH_PROVIDER_LOGO_BASE}/${size}${provider.logo_path}`;
+};
+
 // Fetch crew members from a specific department
 export const fetchCrewByDepartment = async (department, page = 1) => {
   try {

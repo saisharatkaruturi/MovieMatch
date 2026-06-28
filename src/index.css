@@ -1,22 +1,201 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* ============================================================================
+   MovieMatch — Cinematic Dark Design System
+   Inter (UI) + Fraunces (display) · Cyan→Violet accent ramp · Glassmorphism
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
 
 :root {
-  --color-primary: #06b6d4;
-  --color-primary-hover: #0891b2;
-  --color-primary-light: #a5f3fc;
-  --color-accent: #22d3ee;
-  --color-accent-light: #cffafe;
-  --color-bg: #000000;
-  --color-bg-secondary: #0a0a0a;
-  --color-bg-tertiary: #171717;
-  --color-card: #0a0a0a;
-  --color-text: #f5f5f5;
-  --color-text-secondary: #a3a3a3;
-  --color-text-muted: #737373;
-  --color-border: #262626;
-  --shadow: 0 4px 20px rgba(6, 182, 212, 0.15);
-  --shadow-hover: 0 8px 30px rgba(6, 182, 212, 0.25);
+  /* === Surfaces (elevation ramp) === */
+  --surface-0: #07080C;
+  --surface-1: #0F1116;
+  --surface-2: #161922;
+  --surface-3: #1D2029;
+  --surface-4: #252938;
+
+  /* === Borders === */
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.10);
+
+  /* === RGB channel triples (for theme-aware rgba) === */
+  --glass-rgb: 255 255 255;   /* shimmer, hover fills, borders */
+  --ink-rgb:    7   8  12;    /* text-shadows, dense glass */
+  --shadow-rgb: 0   0   0;    /* box/drop shadows */
+  --bg-rgb:     7   8  12;    /* page background */
+
+  /* === Scrims (modal backdrops, nav bar, drawer) === */
+  --scrim-navbar:  rgba(7, 8, 12, 0.72);
+  --scrim-overlay: rgba(7, 8, 12, 0.85);
+  --scrim-drawer:  rgba(0, 0, 0, 0.6);
+
+  /* === Shadows === */
+  --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md:    0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg:    0 20px 60px rgba(0, 0, 0, 0.55);
+  --shadow-card:  0 4px 14px rgba(0, 0, 0, 0.35);
+
+  /* === Accent ramp (cyan→violet) === */
+  --accent-cyan: #22D3EE;
+  --accent-cyan-bright: #67E8F9;
+  --accent-cyan-deep: #0891B2;
+  --accent-violet: #A78BFA;
+  --accent-violet-bright: #C4B5FD;
+  --accent-violet-deep: #7C3AED;
+  --accent-amber: #F59E0B;
+  --accent-amber-bright: #FCD34D;
+  --accent-rose: #F472B6;
+  --accent-emerald: #34D399;
+
+  /* === Text === */
+  --text-primary: #F5F5F7;
+  --text-secondary: #A3A3B0;
+  --text-muted: #6B6B7A;
+  --text-on-accent: #07080C;
+
+  /* === Gradients === */
+  --gradient-accent: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-violet) 100%);
+  --gradient-accent-soft: linear-gradient(135deg, rgba(34, 211, 238, 0.12) 0%, rgba(167, 139, 250, 0.10) 100%);
+  --gradient-hero-mask: linear-gradient(180deg, rgba(7, 8, 12, 0) 0%, rgba(7, 8, 12, 0.55) 45%, rgba(7, 8, 12, 0.92) 80%, var(--surface-0) 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(34, 211, 238, 0.06) 0%, rgba(167, 139, 250, 0.04) 100%);
+  --gradient-violet: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-violet-deep) 100%);
+
+  /* === Glow === */
+  --glow-cyan-sm: 0 0 12px rgba(34, 211, 238, 0.25);
+  --glow-cyan-md: 0 0 24px rgba(34, 211, 238, 0.35), 0 0 48px rgba(34, 211, 238, 0.15);
+  --glow-violet-sm: 0 0 12px rgba(167, 139, 250, 0.25);
+  --glow-violet-md: 0 0 24px rgba(167, 139, 250, 0.35), 0 0 48px rgba(167, 139, 250, 0.15);
+  --glow-amber-sm: 0 0 12px rgba(245, 158, 11, 0.30);
+  --glow-combined: 0 0 0 1px rgba(34, 211, 238, 0.30), 0 12px 32px rgba(34, 211, 238, 0.18), 0 0 60px rgba(167, 139, 250, 0.10);
+
+  /* === Radii === */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* === Spacing === */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* === Type === */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  /* === Motion === */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 600ms;
+
+  /* === Z-index === */
+  --z-nav: 100;
+  --z-dropdown: 200;
+  --z-drawer: 300;
+  --z-toast: 400;
+  --z-modal: 500;
+  --z-loader: 9999;
+
+  /* === Backwards-compat aliases (so existing CSS still resolves) === */
+  --color-primary: var(--accent-cyan);
+  --color-primary-hover: var(--accent-cyan-deep);
+  --color-primary-light: var(--accent-cyan-bright);
+  --color-accent: var(--accent-cyan-bright);
+  --color-accent-light: var(--accent-cyan-bright);
+  --color-bg: var(--surface-0);
+  --color-bg-secondary: var(--surface-1);
+  --color-bg-tertiary: var(--surface-2);
+  --color-card: var(--surface-1);
+  --color-text: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border-strong);
+  --shadow: var(--glow-cyan-sm);
+  --shadow-hover: var(--glow-combined);
 }
+
+/* ============================================================================
+   Light theme — warm cream + glass cards. Overrides the same token names
+   so every CSS site that uses them flips automatically.
+   ============================================================================ */
+
+[data-theme="light"] {
+  /* === Surfaces (warm cream ramp) === */
+  --surface-0: #FAF7F2;   /* page — warm cream */
+  --surface-1: #FFFFFF;   /* card base */
+  --surface-2: #F2EEE6;   /* sunken */
+  --surface-3: #E9E3D6;   /* pressed */
+  --surface-4: #DCD3BF;   /* tooltips */
+
+  /* === Borders (dark alpha on cream) === */
+  --border-subtle: rgba(7, 8, 12, 0.05);
+  --border-soft:   rgba(7, 8, 12, 0.08);
+  --border-strong: rgba(7, 8, 12, 0.14);
+
+  /* === RGB triples — flipped for cream === */
+  --glass-rgb:  7 8 12;
+  --ink-rgb:  255 255 255;
+  --shadow-rgb: 17 17 22;
+  --bg-rgb:  250 247 242;
+
+  /* === Scrims (lighter, more cream-tinted) === */
+  --scrim-navbar:  rgba(250, 247, 242, 0.82);
+  --scrim-overlay: rgba(250, 247, 242, 0.85);
+  --scrim-drawer:  rgba(26, 26, 34, 0.45);
+
+  /* === Shadows (softer, brown-tinted) === */
+  --shadow-sm:    0 2px 8px rgba(17, 17, 22, 0.08);
+  --shadow-md:    0 8px 24px rgba(17, 17, 22, 0.10);
+  --shadow-lg:    0 20px 60px rgba(17, 17, 22, 0.16);
+  --shadow-card:  0 4px 14px rgba(17, 17, 22, 0.10);
+
+  /* === Text === */
+  --text-primary:   #1A1A22;
+  --text-secondary: #5A5A6A;
+  --text-muted:     #8A8A95;
+  --text-on-accent: #07080C;  /* unchanged — used on gradient buttons */
+
+  /* === Accent ramp — shifted deeper for cream contrast === */
+  --accent-cyan:          #0891B2;
+  --accent-cyan-bright:   #06B6D4;
+  --accent-cyan-deep:     #0E7490;
+  --accent-violet:        #7C3AED;
+  --accent-violet-bright: #8B5CF6;
+  --accent-violet-deep:   #5B21B6;
+  --accent-amber:         #D97706;
+  --accent-amber-bright:  #F59E0B;
+  --accent-rose:          #DB2777;
+  --accent-emerald:       #059669;
+
+  /* === Scrollbar track on cream === */
+  scrollbar-color: var(--accent-violet-deep) var(--surface-2);
+}
+
+[data-theme="light"] ::selection {
+  background: var(--accent-violet);
+  color: #FFFFFF;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--surface-2);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  border: 2px solid var(--surface-2);
+}
+
+/* ============================================================================
+   Reset
+   ============================================================================ */
 
 *,
 *::before,
@@ -24,14 +203,29 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-ui);
+  font-size: 16px;
   line-height: 1.6;
+  background-color: var(--surface-0);
+  color: var(--text-primary);
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 #root {
@@ -42,6 +236,18 @@ body {
 
 main {
   flex: 1;
+  display: block;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+img {
+  height: auto;
 }
 
 a {
@@ -51,70 +257,145 @@ a {
 
 button {
   font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
-.footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--color-text-muted);
-  border-top: 1px solid var(--color-border);
-  margin-top: auto;
-  background: var(--color-bg-secondary);
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
-.footer p {
+p {
   margin: 0;
 }
 
-/* Custom scrollbar */
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--accent-violet);
+  color: var(--text-on-accent);
+}
+
+/* ============================================================================
+   Focus rings — cyan inner, violet halo
+   ============================================================================ */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.35);
+}
+
+/* ============================================================================
+   Scrollbar
+   ============================================================================ */
+
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-tertiary);
+  background: var(--surface-1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 4px;
+  background: linear-gradient(180deg, var(--accent-cyan-deep), var(--accent-violet-deep));
+  border-radius: 5px;
+  border: 2px solid var(--surface-1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-hover);
+  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-violet));
 }
 
-/* Selection */
-::selection {
-  background: var(--color-primary);
-  color: black;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-violet-deep) var(--surface-1);
 }
 
-/* Glow effect for interactive elements */
-button:hover,
-.nav-btn:hover,
-.genre-chip:hover,
-.dropdown-item:hover,
-.movie-card:hover,
-.nav-dropdown-content,
-.write-review-btn:hover,
-.submit-btn:hover,
-.like-btn:hover,
-.nav-dropdown:hover .nav-btn {
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5), 0 0 40px rgba(6, 182, 212, 0.3);
+/* ============================================================================
+   Utility classes
+   ============================================================================ */
+
+.glass {
+  background: var(--gradient-glass), var(--surface-1);
+  border: 1px solid var(--border-soft);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
 
-/* Focus glow for accessibility */
-button:focus-visible,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+.text-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.text-mono-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.gradient-text {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  margin: var(--space-12) 0;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ============================================================================
+   Reduced motion — respect user preference
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

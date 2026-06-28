@@ -1,0 +1,76 @@
+/* ============================================================================
+   Logo — branded MovieMatch mark + wordmark
+   ============================================================================ */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.logo__mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-size, 36px);
+  height: var(--logo-size, 36px);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+    var(--surface-1);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.08),
+    0 8px 24px rgba(7, 8, 12, 0.5),
+    0 0 18px rgba(34, 211, 238, 0.18);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.logo:hover .logo__mark {
+  transform: rotate(-6deg) scale(1.04);
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.25),
+    0 12px 32px rgba(7, 8, 12, 0.6),
+    0 0 24px rgba(34, 211, 238, 0.3);
+}
+
+.logo__svg {
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.35));
+}
+
+/* Wordmark */
+
+.logo__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.05em;
+  letter-spacing: -0.02em;
+}
+
+.logo__brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.logo__brand--accent {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@media (max-width: 480px) {
+  .logo__brand {
+    font-size: 1.05rem;
+  }
+}
