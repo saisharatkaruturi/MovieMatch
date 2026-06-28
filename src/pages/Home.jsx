@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
 import MovieCard from '../components/MovieCard';
 import { SkeletonGrid } from '../components/SkeletonCard';
