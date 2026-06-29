@@ -2,25 +2,38 @@
 
 <div align="center">
 
-## AI-Powered Movie Discovery & Recommendation Platform
+### AI-Powered Movie Discovery & Recommendation Platform
 
-Discover trending movies, explore detailed insights, analyze ratings, browse artists, save favorites, and enjoy a modern cinematic experience powered by the TMDB API.
+Discover trending movies, explore detailed insights, browse artists, analyze ratings, save favorites, and enjoy a modern cinematic experience powered by the TMDB API.
 
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge\&logo=react)
-![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge\&logo=vite)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge\&logo=javascript)
-![TMDB](https://img.shields.io/badge/TMDB-API-01D277?style=for-the-badge)
-![Responsive](https://img.shields.io/badge/Responsive-Design-blue?style=for-the-badge)
+<br>
+
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Visit%20Website-success?style=for-the-badge)](https://movie-match-five-xi.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/saisharatkaruturi/MovieMatch)
+
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript)
+![TMDB API](https://img.shields.io/badge/API-TMDB-01D277)
+![Responsive](https://img.shields.io/badge/Responsive-Yes-success)
 
 </div>
 
 ---
 
+# 🌐 Live Website
+
+### 🚀 https://movie-match-five-xi.vercel.app/
+
+---
+
 # 📖 Overview
 
-MovieMatch is a modern movie discovery and recommendation platform built with **React**, **Vite**, and the **TMDB API**. It enables users to discover trending movies, explore popular titles, search films instantly, browse actor profiles, analyze movie ratings, and explore content across multiple languages including **English**, **Hindi**, and **Telugu**.
+MovieMatch is a modern AI-inspired movie discovery platform developed using **React**, **Vite**, and the **TMDB API**.
 
-Designed with a focus on speed, responsiveness, and an engaging user experience, MovieMatch combines a clean interface with rich movie data to deliver a complete entertainment discovery platform.
+The platform enables users to discover trending movies, search thousands of films, explore detailed movie information, browse actor profiles, analyze ratings, and save favorite movies through a fast, responsive, and visually engaging interface.
+
+Built with performance, scalability, and user experience in mind, MovieMatch demonstrates modern frontend development practices including reusable components, API integration, responsive UI, and optimized application architecture.
 
 ---
 
@@ -28,175 +41,193 @@ Designed with a focus on speed, responsiveness, and an engaging user experience,
 
 ## 🎥 Movie Discovery
 
-* Trending Movies
-* Popular Movies
-* Top Rated Movies
-* Upcoming Movies
-* Featured Movie Banner
+- Trending Movies
+- Popular Movies
+- Top Rated Movies
+- Upcoming Releases
+- Featured Hero Banner
+
+---
 
 ## 🔍 Smart Search
 
-* Instant Search
-* Debounced Search
-* Genre Filtering
-* Dynamic Search Results
+- Instant Movie Search
+- Debounced Search
+- Genre Filtering
+- Dynamic Search Results
 
-## 📊 Movie Analytics
+---
 
-* IMDb Ratings
-* TMDB Ratings
-* Runtime
-* Genres
-* Languages
-* Popularity Metrics
-* Release Information
+## 🎬 Detailed Movie Information
+
+- Movie Overview
+- Posters
+- Backdrops
+- Release Date
+- Runtime
+- Genres
+- Spoken Languages
+- Production Companies
+- IMDb Rating
+- TMDB Rating
+- Popularity Metrics
+
+---
 
 ## 🎭 Artist Explorer
 
-* Actor Profiles
-* Biography
-* Known Movies
-* Cast Information
+- Actor Profiles
+- Biography
+- Known For Movies
+- Cast Information
+- Profile Images
+
+---
+
+## 📊 Analytics Dashboard
+
+- Rating Analysis
+- Vote Statistics
+- Popularity Metrics
+- Runtime Information
+- Release Insights
+
+---
 
 ## ❤️ Favorites
 
-* Save Favorite Movies
-* Personal Collection
-* Quick Access
-
-## 🎬 Movie Details
-
-* Posters
-* Movie Overview
-* Release Date
-* Ratings
-* Production Information
-* Cast Details
-
-## 📺 Where To Watch
-
-* Streaming Information
-* Watch Availability
-
-## 🌙 User Experience
-
-* Responsive Design
-* Theme Toggle
-* Smooth Animations
-* Skeleton Loading
-* Toast Notifications
-* Modern Navigation
+- Save Favorite Movies
+- Personal Collection
+- Quick Access Dashboard
 
 ---
 
-# 📸 Complete Application Showcase
+## 📺 Watch Information
+
+- Streaming Availability
+- Watch Providers
+- Platform Information
 
 ---
+
+## 🎨 Modern UI/UX
+
+- Dark Theme
+- Responsive Design
+- Smooth Animations
+- Skeleton Loading
+- Toast Notifications
+- Reusable Components
+- Mobile Friendly
+
+---
+
+# 🖼️ Project Gallery
 
 ## 🏠 Dashboard
 
-| Dashboard                                 | Dashboard 2                                   |
-| ----------------------------------------- | --------------------------------------------- |
+| Dashboard | Dashboard |
+|-----------|-----------|
 | ![](Screenshots-moviematch/Dashboard.png) | ![](Screenshots-moviematch/Dashboard%202.png) |
 
-| Dashboard 3                                   | Dashboard 4                                   |
-| --------------------------------------------- | --------------------------------------------- |
+| Dashboard | Dashboard |
+|-----------|-----------|
 | ![](Screenshots-moviematch/Dashboard%203.png) | ![](Screenshots-moviematch/Dashboard%204.png) |
 
 ---
 
-## 🌍 English Movies
+## 🎬 English Movies
 
-| English 1                                   | English 2                                   |
-| ------------------------------------------- | ------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Engilsh-DB1.png) | ![](Screenshots-moviematch/English-DB2.png) |
 
-| English 3                                   | English 4                                     |
-| ------------------------------------------- | --------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/English-DB3.png) | ![](Screenshots-moviematch/English%20DB4.png) |
 
-| English 5                                     | English 6                                     |
-| --------------------------------------------- | --------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/English%20DB5.png) | ![](Screenshots-moviematch/English%20DB6.png) |
 
 ---
 
-## 🇮🇳 Hindi Movies
+## 🎥 Hindi Movies
 
-| Hindi 1                                     | Hindi 2                                     |
-| ------------------------------------------- | ------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Hindi%20DB1.png) | ![](Screenshots-moviematch/Hindi%20DB2.png) |
 
-| Hindi 3                                     | Hindi 4                                     |
-| ------------------------------------------- | ------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Hindi%20DB3.png) | ![](Screenshots-moviematch/Hindi%20DB4.png) |
 
-| Hindi 5                                     | Hindi 6                                     |
-| ------------------------------------------- | ------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Hindi%20DB5.png) | ![](Screenshots-moviematch/Hindi%20DB6.png) |
 
 ---
 
-## 🎬 Telugu Movies
+## 🎞️ Telugu Movies
 
-| Telugu 1                                     | Telugu 2                                     |
-| -------------------------------------------- | -------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/TElugu%20DB1.png) | ![](Screenshots-moviematch/Telugu%20DB2.png) |
 
-| Telugu 3                                     | Telugu 4                                     |
-| -------------------------------------------- | -------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Telugu%20DB3.png) | ![](Screenshots-moviematch/Telugu%20DB4.png) |
 
-| Telugu 5                                     | Telugu 6                                     |
-| -------------------------------------------- | -------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Telugu%20DB5.png) | ![](Screenshots-moviematch/Telugu%20DB6.png) |
 
-| Telugu 7                                     |   |
-| -------------------------------------------- | - |
-| ![](Screenshots-moviematch/Telugu%20DB7.png) |   |
+| |
+|---|
+| ![](Screenshots-moviematch/Telugu%20DB7.png) |
 
 ---
 
-## 🎭 Artist Explorer
+## 🎭 Artist Database
 
-| Artists                                      | Artist Profile                               |
-| -------------------------------------------- | -------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Artists%20DB.png) | ![](Screenshots-moviematch/Artist%20DB!.png) |
 
-| Artist Details                               | Artist Biography                             |
-| -------------------------------------------- | -------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Artist%20DB2.png) | ![](Screenshots-moviematch/Artist%20DB3.png) |
-
----
-
-## 📊 Movie Analytics
-
-| Analytics                                | Analytics 2                               |
-| ---------------------------------------- | ----------------------------------------- |
-| ![](Screenshots-moviematch/Analysis.png) | ![](Screenshots-moviematch/Analysis1.png) |
-
-| Analytics 3                                  | Analytics 4                               |
-| -------------------------------------------- | ----------------------------------------- |
-| ![](Screenshots-moviematch/Analysis%202.png) | ![](Screenshots-moviematch/Analysis3.png) |
-
-| Analytics 5                                  |   |
-| -------------------------------------------- | - |
-| ![](Screenshots-moviematch/Analysis%203.png) |   |
 
 ---
 
 ## ⭐ Reviews
 
-| Reviews                                     | Review Details                               |
-| ------------------------------------------- | -------------------------------------------- |
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Review%20DB.png) | ![](Screenshots-moviematch/Review%20DB1.png) |
 
 ---
 
-## ❓ Help Center
+## 📈 Analytics
 
-| Help                                 | Help Guide                            |
-| ------------------------------------ | ------------------------------------- |
+| | |
+|---|---|
+| ![](Screenshots-moviematch/Analysis.png) | ![](Screenshots-moviematch/Analysis1.png) |
+
+| | |
+|---|---|
+| ![](Screenshots-moviematch/Analysis%202.png) | ![](Screenshots-moviematch/Analysis%203.png) |
+
+| |
+|---|
+| ![](Screenshots-moviematch/Analysis3.png) |
+
+---
+
+## ❓ Help
+
+| | |
+|---|---|
 | ![](Screenshots-moviematch/Help.png) | ![](Screenshots-moviematch/Help1.png) |
 
 ---
@@ -205,33 +236,33 @@ Designed with a focus on speed, responsiveness, and an engaging user experience,
 
 ### Frontend
 
-* React
-* JavaScript (ES6+)
-* Vite
-* CSS3
+- React
+- JavaScript (ES6+)
+- Vite
+- CSS3
 
 ### API
 
-* TMDB API
+- TMDB API
 
 ### State Management
 
-* React Context API
-* Custom Hooks
+- React Context API
+- Custom Hooks
 
 ### UI Components
 
-* Theme Toggle
-* Skeleton Loading
-* Toast Notifications
-* Responsive Layout
-* Reusable Components
+- Responsive Layout
+- Theme Toggle
+- Skeleton Loading
+- Toast Notifications
+- Reusable Components
 
 ---
 
 # 📂 Project Structure
 
-```text
+```
 MovieMatch
 │
 ├── public
@@ -242,7 +273,8 @@ MovieMatch
 │   ├── hooks
 │   ├── pages
 │   ├── services
-│   └── utils
+│   ├── utils
+│   └── assets
 │
 ├── package.json
 ├── vite.config.js
@@ -259,7 +291,7 @@ Clone the repository
 git clone https://github.com/saisharatkaruturi/MovieMatch.git
 ```
 
-Navigate to the project
+Navigate into the project
 
 ```bash
 cd MovieMatch
@@ -271,42 +303,49 @@ Install dependencies
 npm install
 ```
 
-Run the development server
+Start development server
 
 ```bash
 npm run dev
 ```
 
----
+Build for production
 
-# 🌐 API
-
-MovieMatch integrates the **TMDB (The Movie Database) API** to provide:
-
-* Movie Information
-* Trending Movies
-* Popular Movies
-* Top Rated Movies
-* Upcoming Movies
-* Cast Information
-* Ratings
-* Genres
-* Search Results
+```bash
+npm run build
+```
 
 ---
 
-# 📈 Future Enhancements
+# 🌐 API Integration
 
-* 🤖 AI Personalized Recommendations
-* 🎙️ Voice Search
-* 🎥 Movie Trailers
-* ⭐ User Watchlists
-* 👥 Authentication
-* 💬 Community Reviews
-* 🎯 AI Recommendation Engine
-* 📱 Progressive Web App (PWA)
-* 🔔 Notifications
-* 🎬 Streaming Platform Integration
+MovieMatch uses the **TMDB (The Movie Database) API** to provide:
+
+- Trending Movies
+- Popular Movies
+- Top Rated Movies
+- Upcoming Movies
+- Movie Search
+- Genres
+- Cast Information
+- Ratings
+- Reviews
+- Movie Metadata
+
+---
+
+# 🚀 Future Enhancements
+
+- 🤖 AI Personalized Recommendations
+- 🎙️ Voice Search
+- 🎬 Movie Trailers
+- 👤 User Authentication
+- ⭐ Watchlists
+- 💬 Community Reviews
+- 🎯 AI Recommendation Engine
+- 📱 Progressive Web App (PWA)
+- 🔔 Notifications
+- 🎥 OTT Platform Integration
 
 ---
 
@@ -324,14 +363,26 @@ Contributions are welcome.
 
 # 📄 License
 
-This project is intended for educational and portfolio purposes.
+This project is intended for **educational**, **portfolio**, and **learning** purposes.
+
+---
+
+# 👨‍💻 Developer
+
+**Sai Sharat Karuturi**
+
+🌐 Live Demo  
+https://movie-match-five-xi.vercel.app/
+
+💻 GitHub  
+https://github.com/saisharatkaruturi/MovieMatch
 
 ---
 
 <div align="center">
 
-## ⭐ If you like this project, consider giving it a Star!
+### ⭐ If you like this project, consider giving it a Star!
 
-Developed with ❤️ by **Sai Sharat Karuturi**
+Made with ❤️ by **Sai Sharat Karuturi**
 
 </div>
